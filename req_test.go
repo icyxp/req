@@ -14,7 +14,7 @@ import (
 func TestUrlParam(t *testing.T) {
 	m := map[string]interface{}{
 		"access_token": "123abc",
-		"name":         "roc",
+		"name":         "xp",
 		"enc":          "中文",
 	}
 	queryHandler := func(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +43,7 @@ func TestUrlParam(t *testing.T) {
 func TestFormParam(t *testing.T) {
 	formParam := Param{
 		"access_token": "123abc",
-		"name":         "roc",
+		"name":         "xp",
 		"enc":          "中文",
 	}
 	formHandler := func(w http.ResponseWriter, r *http.Request) {
@@ -65,7 +65,7 @@ func TestFormParam(t *testing.T) {
 func TestParamWithBody(t *testing.T) {
 	reqBody := "request body"
 	p := Param{
-		"name": "roc",
+		"name": "xp",
 		"job":  "programmer",
 	}
 	buf := bytes.NewBufferString(reqBody)
@@ -74,7 +74,7 @@ func TestParamWithBody(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if r.Request().URL.Query().Get("name") != "roc" {
+	if r.Request().URL.Query().Get("name") != "xp" {
 		t.Error("param should in the url when set body manually")
 	}
 	if string(r.reqBody) != reqBody {
@@ -88,7 +88,7 @@ func TestParamBoth(t *testing.T) {
 		"enc":          "中文",
 	}
 	formParam := Param{
-		"name": "roc",
+		"name": "xp",
 		"job":  "软件工程师",
 	}
 	handler := func(w http.ResponseWriter, r *http.Request) {
@@ -242,7 +242,7 @@ func TestBodyXML(t *testing.T) {
 func TestHeader(t *testing.T) {
 	header := Header{
 		"User-Agent":    "V1.0.0",
-		"Authorization": "roc",
+		"Authorization": "xp",
 	}
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		for key, value := range header {

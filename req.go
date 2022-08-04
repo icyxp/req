@@ -222,7 +222,7 @@ func (r *Req) Do(method, rawurl string, vs ...interface{}) (resp *Resp, err erro
 				formParam.Copy(p)
 			}
 		case Param:
-			if method == "GET" || method == "HEAD" {
+			if method == "GET" || method == "HEAD" || method == "DELETE" {
 				queryParam.Adds(vv)
 			} else {
 				formParam.Adds(vv)

@@ -1,5 +1,5 @@
 # req
-[![GoDoc](https://godoc.org/github.com/imroc/req?status.svg)](https://godoc.org/github.com/imroc/req)
+[![GoDoc](https://godoc.org/github.com/icyxp/req?status.svg)](https://godoc.org/github.com/icyxp/req)
 
 A golang http request library for humans
 
@@ -27,7 +27,7 @@ Document
 Install
 =======
 ``` sh
-go get github.com/imroc/req
+go get github.com/icyxp/req
 ```
 
 Overview
@@ -77,7 +77,7 @@ header := req.Header{
 	"Authorization": "Basic YWRtaW46YWRtaW4=",
 }
 param := req.Param{
-	"name": "imroc",
+	"name": "icyxp",
 	"cmd":  "add",
 }
 // only url is required, others are optional.
@@ -115,7 +115,7 @@ type HeaderStruct struct {
 func main(){
 	h := HeaderStruct{
 		"V1.0.0",
-		"roc",
+		"xp",
 	}
 
 	authHeader := req.HeaderFromStruct(h) 
@@ -128,15 +128,15 @@ func main(){
 Use `req.Param` (it is actually a `map[string]interface{}`)
 ``` go
 param := req.Param{
-	"id":  "imroc",
-	"pwd": "roc",
+	"id":  "icyxp",
+	"pwd": "xp",
 }
-req.Get("http://foo.bar/api", param) // http://foo.bar/api?id=imroc&pwd=roc
-req.Post(url, param)                  // body => id=imroc&pwd=roc
+req.Get("http://foo.bar/api", param) // http://foo.bar/api?id=icyxp&pwd=xp
+req.Post(url, param)                  // body => id=icyxp&pwd=xp
 ```
 use `req.QueryParam` force to append params to the url (it is also actually a `map[string]interface{}`)
 ``` go
-req.Post("http://foo.bar/api", req.Param{"name": "roc", "age": "22"}, req.QueryParam{"access_token": "fedledGF9Hg9ehTU"})
+req.Post("http://foo.bar/api", req.Param{"name": "xp", "age": "22"}, req.QueryParam{"access_token": "fedledGF9Hg9ehTU"})
 /*
 POST /api?access_token=fedledGF9Hg9ehTU HTTP/1.1
 Host: foo.bar
@@ -145,14 +145,14 @@ Content-Length: 15
 Content-Type: application/x-www-form-urlencoded;charset=UTF-8
 Accept-Encoding: gzip
 
-age=22&name=roc
+age=22&name=xp
 */
 ```
 
 ## <a name="Set-Body">Set Body</a>
 Put `string`, `[]byte` and `io.Reader` as body directly.
 ``` go
-req.Post(url, "id=roc&cmd=query")
+req.Post(url, "id=xp&cmd=query")
 ```
 Put object as xml or json body (add `Content-Type` header automatically)
 ``` go
@@ -182,7 +182,7 @@ log.Printf("%+v", r) // output the same format as Debug is enabled
 Output in simple way (default format)
 ``` go
 r, _ := req.Get(url, param)
-log.Printf("%v\n", r) // GET http://foo.bar/api?name=roc&cmd=add {"code":"0","msg":"success"}
+log.Printf("%v\n", r) // GET http://foo.bar/api?name=xp&cmd=add {"code":"0","msg":"success"}
 log.Prinln(r)         // same as above
 ```
 
@@ -234,11 +234,11 @@ fmt.Println(resp.StatusCode)
 ## <a name="Upload">Upload</a>
 Use `req.File` to match files
 ``` go
-req.Post(url, req.File("imroc.png"), req.File("/Users/roc/Pictures/*.png"))
+req.Post(url, req.File("icyxp.png"), req.File("/Users/xp/Pictures/*.png"))
 ```
 Use `req.FileUpload` to fully control
 ``` go
-file, _ := os.Open("imroc.png")
+file, _ := os.Open("icyxp.png")
 req.Post(url, req.FileUpload{
 	File:      file,
 	FieldName: "file",       // FieldName is form field name
@@ -250,14 +250,14 @@ Use `req.UploadProgress` to listen upload progress
 progress := func(current, total int64) {
 	fmt.Println(float32(current)/float32(total)*100, "%")
 }
-req.Post(url, req.File("/Users/roc/Pictures/*.png"), req.UploadProgress(progress))
+req.Post(url, req.File("/Users/xp/Pictures/*.png"), req.UploadProgress(progress))
 fmt.Println("upload complete")
 ```
 
 ## <a name="Download">Download</a>
 ``` go
 r, _ := req.Get(url)
-r.ToFile("imroc.png")
+r.ToFile("icyxp.png")
 ```
 Use `req.DownloadProgress` to listen download progress
 ```go

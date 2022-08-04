@@ -15,7 +15,7 @@ func TestParseStruct(t *testing.T) {
 
 	h := HeaderStruct{
 		"V1.0.0",
-		"roc",
+		"xp",
 	}
 
 	var header Header
@@ -30,13 +30,13 @@ func TestParseStruct(t *testing.T) {
 func TestHeaderFromStruct(t *testing.T) {
 
 	type HeaderStruct struct {
-		UserAgent string `json:"User-Agent"`
+		UserAgent     string `json:"User-Agent"`
 		Authorization string `json:"Authorization"`
 	}
 
 	h := HeaderStruct{
 		"V1.0.0",
-		"roc",
+		"xp",
 	}
 
 	header := HeaderFromStruct(h)

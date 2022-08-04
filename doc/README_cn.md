@@ -1,5 +1,5 @@
 # req
-[![GoDoc](https://godoc.org/github.com/imroc/req?status.svg)](https://godoc.org/github.com/imroc/req)
+[![GoDoc](https://godoc.org/github.com/icyxp/req?status.svg)](https://godoc.org/github.com/icyxp/req)
 
 Go语言人性化HTTP请求库
 
@@ -20,7 +20,7 @@ Go语言人性化HTTP请求库
 安装
 =======
 ``` sh
-go get github.com/imroc/req
+go get github.com/icyxp/req
 ```
 
 概要
@@ -69,7 +69,7 @@ header := req.Header{
 	"Authorization": "Basic YWRtaW46YWRtaW4=",
 }
 param := req.Param{
-	"name": "imroc",
+	"name": "icyxp",
 	"cmd":  "add",
 }
 // 只有url必选，其它参数都是可选
@@ -107,7 +107,7 @@ type HeaderStruct struct {
 func main(){
 	h := HeaderStruct{
 		"V1.0.0",
-		"roc",
+		"xp",
 	}
 
 	authHeader := req.HeaderFromStruct(h) 
@@ -120,15 +120,15 @@ func main(){
 Use `req.Param` (它实际上是一个 `map[string]interface{}`)
 ``` go
 param := req.Param{
-	"id":  "imroc",
-	"pwd": "roc",
+	"id":  "icyxp",
+	"pwd": "xp",
 }
-req.Get("http://foo.bar/api", param) // http://foo.bar/api?id=imroc&pwd=roc
-req.Post(url, param)                  // 请求体 => id=imroc&pwd=roc
+req.Get("http://foo.bar/api", param) // http://foo.bar/api?id=icyxp&pwd=xp
+req.Post(url, param)                  // 请求体 => id=icyxp&pwd=xp
 ```
 使用 `req.QueryParam` 强制将请求参数拼在url后面 (它实际上也是一个 `map[string]interface{}`)
 ``` go
-req.Post("http://foo.bar/api", req.Param{"name": "roc", "age": "22"}, req.QueryParam{"access_token": "fedledGF9Hg9ehTU"})
+req.Post("http://foo.bar/api", req.Param{"name": "xp", "age": "22"}, req.QueryParam{"access_token": "fedledGF9Hg9ehTU"})
 /*
 POST /api?access_token=fedledGF9Hg9ehTU HTTP/1.1
 Host: foo.bar
@@ -137,14 +137,14 @@ Content-Length: 15
 Content-Type: application/x-www-form-urlencoded;charset=UTF-8
 Accept-Encoding: gzip
 
-age=22&name=roc
+age=22&name=xp
 */
 ```
 
 ## <a name="Set-Body">设置请求体</a>
 Put `string`, `[]byte` and `io.Reader` as body directly.
 ``` go
-req.Post(url, "id=roc&cmd=query")
+req.Post(url, "id=xp&cmd=query")
 ```
 将对象作为JSON或XML请求体（自动添加 `Content-Type` 请求头）
 ``` go
@@ -174,7 +174,7 @@ log.Printf("%+v", r) // 输出格式和Debug开启时的格式一样
 简单输出（默认格式）
 ``` go
 r, _ := req.Get(url, param)
-log.Printf("%v\n", r) // GET http://foo.bar/api?name=roc&cmd=add {"code":"0","msg":"success"}
+log.Printf("%v\n", r) // GET http://foo.bar/api?name=xp&cmd=add {"code":"0","msg":"success"}
 log.Prinln(r)         // 和上面一样
 ```
 
@@ -226,11 +226,11 @@ fmt.Println(resp.StatusCode)
 ## <a name="Upload">上传</a>
 使用 `req.File` 匹配文件
 ``` go
-req.Post(url, req.File("imroc.png"), req.File("/Users/roc/Pictures/*.png"))
+req.Post(url, req.File("icyxp.png"), req.File("/Users/xp/Pictures/*.png"))
 ```
 使用 `req.FileUpload` 细粒度控制上传
 ``` go
-file, _ := os.Open("imroc.png")
+file, _ := os.Open("icyxp.png")
 req.Post(url, req.FileUpload{
 	File:      file,
 	FieldName: "file",       // FieldName 是表单字段名
@@ -242,14 +242,14 @@ req.Post(url, req.FileUpload{
 progress := func(current, total int64) {
 	fmt.Println(float32(current)/float32(total)*100, "%")
 }
-req.Post(url, req.File("/Users/roc/Pictures/*.png"), req.UploadProgress(progress))
+req.Post(url, req.File("/Users/xp/Pictures/*.png"), req.UploadProgress(progress))
 fmt.Println("upload complete")
 ```
 
 ## <a name="Download">下载</a>
 ``` go
 r, _ := req.Get(url)
-r.ToFile("imroc.png")
+r.ToFile("icyxp.png")
 ```
 使用`req.DownloadProgress`监听下载进度
 ```go
